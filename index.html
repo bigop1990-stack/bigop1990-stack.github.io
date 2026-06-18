@@ -1,22 +1,361 @@
-<!DOCTYPE html>
+ Whtml_content = '''<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My First Website</title>
+    <title>Optimistic Hub | Architecture & 3D Max Design</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 60px 0;
             text-align: center;
         }
-        h1 { color: #333; }
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+        header .tagline {
+            font-size: 1.3em;
+            color: #e94560;
+            font-weight: 300;
+        }
+        /* Navigation */
+        nav {
+            background: #0f3460;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1em;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #e94560;
+        }
+        /* Sections */
+        section {
+            padding: 60px 0;
+        }
+        h2 {
+            font-size: 2.2em;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #1a1a2e;
+        }
+        /* About Section */
+        .about {
+            background: white;
+        }
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            max-width: 600px;
+        }
+        .about-text p {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            color: #555;
+        }
+        .about-image {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5em;
+            color: #e94560;
+        }
+        /* Services */
+        .services {
+            background: #f8f9fa;
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .service-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        .service-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        .service-card h3 {
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            color: #1a1a2e;
+        }
+        .service-card p {
+            color: #666;
+        }
+        /* Portfolio */
+        .portfolio {
+            background: white;
+        }
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        .portfolio-item {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            height: 250px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3em;
+            position: relative;
+            overflow: hidden;
+        }
+        .portfolio-item::before {
+            content: "🏗️";
+            font-size: 3em;
+            position: absolute;
+            opacity: 0.3;
+        }
+        .portfolio-item span {
+            position: relative;
+            z-index: 1;
+        }
+        /* Contact */
+        .contact {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            text-align: center;
+        }
+        .contact h2 {
+            color: white;
+        }
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.2em;
+        }
+        .contact-item .icon {
+            font-size: 2em;
+        }
+        .phone-number {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #e94560;
+            margin-top: 30px;
+        }
+        /* Footer */
+        footer {
+            background: #0a0a0a;
+            color: #888;
+            text-align: center;
+            padding: 30px 0;
+        }
+        footer a {
+            color: #e94560;
+            text-decoration: none;
+        }
+        /* Mobile */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+            nav ul {
+                gap: 20px;
+                font-size: 0.9em;
+            }
+            .about-content {
+                flex-direction: column;
+            }
+            .about-image {
+                width: 200px;
+                height: 200px;
+            }
+            .contact-info {
+                gap: 30px;
+            }
+        }
     </style>
 </head>
 <body>
-    <h1>🎉 Hello, World!</h1>
-    <p>Welcome to my free website hosted on GitHub Pages.</p>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <h1>🏗️ OPTIMISTIC HUB</h1>
+            <p class="tagline">Architecture | 3D Max Design | Visualization</p>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About Optimistic Hub</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Welcome to <strong>Optimistic Hub</strong> — where creativity meets precision in architecture and 3D visualization.</p>
+                    <p>We specialize in transforming architectural concepts into stunning, photorealistic 3D renders using <strong>3D Max</strong> and industry-leading design tools.</p>
+                    <p>Whether you need architectural drawings, interior design visualization, or 3D modeling for your next project, Optimistic Hub delivers excellence with an optimistic approach to every design challenge.</p>
+                    <p>Our mission is to bring your architectural dreams to life with clarity, detail, and artistic vision.</p>
+                </div>
+                <div class="about-image">🏗️</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🏠</div>
+                    <h3>Architectural Design</h3>
+                    <p>Complete architectural planning and design solutions for residential, commercial, and industrial projects.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🎨</div>
+                    <h3>3D Max Visualization</h3>
+                    <p>Photorealistic 3D rendering and visualization using 3D Max to bring your designs to life before construction.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🛋️</div>
+                    <h3>Interior Design</h3>
+                    <p>Stunning interior space planning and design with detailed 3D walkthroughs and material visualization.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📐</div>
+                    <h3>3D Modeling</h3>
+                    <p>Precision 3D modeling for architectural elements, furniture, and custom design components.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🌆</div>
+                    <h3>Exterior Rendering</h3>
+                    <p>High-quality exterior visualizations with realistic lighting, landscaping, and environmental context.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📋</div>
+                    <h3>Project Consultation</h3>
+                    <p>Expert architectural consultation to guide your project from concept to completion with confidence.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2>Portfolio</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item"><span>Residential Design</span></div>
+                <div class="portfolio-item"><span>Commercial Complex</span></div>
+                <div class="portfolio-item"><span>Interior Visualization</span></div>
+                <div class="portfolio-item"><span>3D Max Render</span></div>
+                <div class="portfolio-item"><span>Exterior Concept</span></div>
+                <div class="portfolio-item"><span>Modern Architecture</span></div>
+            </div>
+            <p style="text-align: center; margin-top: 30px; color: #888; font-style: italic;">Contact us to see our full portfolio of completed projects.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Get In Touch</h2>
+            <p style="font-size: 1.2em; margin-bottom: 20px;">Ready to bring your architectural vision to life? Let's work together!</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span class="icon">📞</span>
+                    <span>Call Us</span>
+                </div>
+                <div class="contact-item">
+                    <span class="icon">📧</span>
+                    <span>Email Us</span>
+                </div>
+                <div class="contact-item">
+                    <span class="icon">📍</span>
+                    <span>Nigeria</span>
+                </div>
+            </div>
+            <p class="phone-number">0704 942 2100</p>
+            <p style="margin-top: 15px; font-size: 1.1em;">Available for projects nationwide</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>© 2026 Optimistic Hub. All rights reserved.</p>
+            <p>Built with ❤️ on <a href="https://github.com">GitHub Pages</a></p>
+        </div>
+    </footer>
 </body>
-</html>
+</html>'''
